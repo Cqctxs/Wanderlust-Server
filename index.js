@@ -16,7 +16,10 @@ app.enable("trust proxy");
 app.disable("x-powered-by");
 connectMongo();
 
-app.use("/test", require("./routes/test"));
+app.use("/login", require("./routes/login"));
+app.use("/logout", require("./routes/logout"));
+app.use("/register", require("./routes/register"));
+app.use("/refresh", require("./routes/refresh"));
 
 app.use("/", function (req, res) {
   res.json({ error: "endpoint not found" });
