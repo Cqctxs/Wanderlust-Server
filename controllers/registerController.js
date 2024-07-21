@@ -11,7 +11,6 @@ const handleNewUser = async (req, res) => {
         const result = await User.create({ 
             "username": user,
             "password": hashedPwd,
-            "refreshToken": ""
         });
         console.log(result);
         res.status(201).json({ 'success': `New user ${user} created!` });
