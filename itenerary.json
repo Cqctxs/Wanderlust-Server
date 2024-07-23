@@ -1,0 +1,120 @@
+{
+  "country": "Italy",
+  "itinerary": [
+    {
+      "activities": [
+        "Arrive at Leonardo da Vinci–Fiumicino Airport (FCO), Rome",
+        "Check into your hotel near the Colosseum",
+        "Take a stroll around the Colosseum and Roman Forum",
+        "Enjoy dinner at a charming trattoria in Trastevere"
+      ],
+      "location": "Rome",
+      "overview": "Benvenuti in Italia! Your Italian adventure begins in the historical capital, Rome. After settling in, take a step back in time with a walk around the magnificent Colosseum and Roman Forum. Conclude your day with authentic Italian flavors in the charming Trastevere neighborhood.",
+      "transportation": "flight",
+      "date": "2024-04-27"
+    },
+    {
+      "activities": [
+        "Explore the Colosseum, the world's largest amphitheater",
+        "Wander through the ruins of the Roman Forum",
+        "Visit the Vatican City, including St. Peter's Basilica and the Vatican Museums",
+        "Indulge in delicious gelato while exploring the city"
+      ],
+      "location": "Rome",
+      "overview": "Today, delve into the heart of Ancient Rome with visits to the impressive Colosseum and the historical Roman Forum. Afterwards, cross the border into Vatican City, a city-state within Rome, and marvel at the grandeur of St. Peter's Basilica and the artistic treasures within the Vatican Museums. Don't forget to treat yourself to a scoop (or two) of authentic Italian gelato along the way!",
+      "transportation": "bus",
+      "date": "2024-04-28"
+    },
+    {
+      "activities": [
+        "Toss a coin in the Trevi Fountain",
+        "Explore the Pantheon, a former Roman temple",
+        "Visit the Piazza Navona, known for its Baroque fountains",
+        "Enjoy dinner with a view of the Spanish Steps"
+      ],
+      "location": "Rome",
+      "overview": "Day three in Rome is dedicated to exploring the city's iconic squares and fountains. Start with the legendary Trevi Fountain, ensuring your return to Rome with a toss of a coin. Marvel at the architectural genius of the Pantheon, a well-preserved ancient Roman temple. Then, soak in the vibrant atmosphere of Piazza Navona, famous for its stunning Baroque fountains. Finally, enjoy a delightful dinner overlooking the iconic Spanish Steps.",
+      "transportation": "bus",
+      "date": "2024-04-29"
+    },
+    {
+      "activities": [
+        "Take a high-speed train to Florence, the heart of Tuscany",
+        "Check into your hotel near the Duomo",
+        "Enjoy a leisurely walk along the Ponte Vecchio, Florence's only bridge spared from destruction during World War II",
+        "Indulge in a traditional Florentine steak dinner"
+      ],
+      "location": "Florence",
+      "overview": "Today, journey from the ancient wonders of Rome to the Renaissance charm of Florence, Tuscany's captivating capital. After settling into your hotel, take a stroll along the Ponte Vecchio, the only bridge in Florence to survive World War II, adorned with shops on both sides. For dinner, savor the exquisite flavors of a traditional Florentine steak.",
+      "transportation": "train",
+      "date": "2024-04-30"
+    },
+    {
+      "activities": [
+        "Visit the iconic Duomo, Florence's Cathedral, and climb to the top of Brunelleschi's Dome for panoramic city views",
+        "Explore the Galleria dell'Accademia to marvel at Michelangelo's David",
+        "Wander through the Uffizi Gallery, home to masterpieces of Renaissance art",
+        "Enjoy a taste of artisanal gelato, a Florentine specialty"
+      ],
+      "location": "Florence",
+      "overview": "Today is dedicated to the art and architecture of Florence. Begin with a visit to the iconic Duomo, climbing to the top of Brunelleschi's Dome for breathtaking views of the city. Then, come face-to-face with Michelangelo's David at the Galleria dell'Accademia. Afterwards, immerse yourself in Renaissance masterpieces at the world-renowned Uffizi Gallery. Conclude your day with a taste of Florence's delectable artisanal gelato.",
+      "transportation": "bus",
+      "date": "2024-05-01"
+    },
+    {
+      "activities": [
+        "Take a day trip to Siena, a medieval city known for its Palio horse race",
+        "Explore the Piazza del Campo, Siena's main public space and the setting for the Palio",
+        "Visit the Siena Cathedral, a masterpiece of Romanesque-Gothic architecture",
+        "Enjoy lunch at a traditional Tuscan restaurant in the countryside"
+      ],
+      "location": "Siena",
+      "overview": "Today, journey back in time with a visit to Siena, a captivating medieval city famous for its thrilling Palio horse race. Explore the Piazza del Campo, the heart of Siena and the setting for the Palio. Then, marvel at the architectural splendor of the Siena Cathedral, a masterpiece of Romanesque-Gothic design. Savor the flavors of authentic Tuscan cuisine with a delightful lunch at a traditional restaurant nestled in the picturesque countryside.",
+      "transportation": "bus",
+      "date": "2024-05-02"
+    },
+    {
+      "activities": [
+        "Take a scenic train ride to Venice, the city of canals",
+        "Check into your hotel near St. Mark's Square",
+        "Enjoy a gondola ride along the canals, serenaded by a gondolier (optional)",
+        "Savor dinner at a traditional Venetian restaurant"
+      ],
+      "location": "Venice",
+      "overview": "Today, embark on a picturesque train journey to Venice, the enchanting city built on water. Upon arrival, settle into your hotel and experience the magic of Venice with a gondola ride along the canals, serenaded by a gondolier. Indulge in a delightful dinner at a traditional Venetian restaurant, savoring the unique flavors of the city.",
+      "transportation": "train",
+      "date": "2024-05-03"
+    },
+    {
+      "activities": [
+        "Explore St. Mark's Square, Venice's grand piazza",
+        "Visit St. Mark's Basilica, a masterpiece of Byzantine art",
+        "Climb the Campanile di San Marco for panoramic city views",
+        "Enjoy a traditional Venetian cicchetti tour, sampling small bites and local wines"
+      ],
+      "location": "Venice",
+      "overview": "Today, immerse yourself in the splendor and charm of Venice. Begin at St. Mark's Square, the city's grand piazza, and marvel at the architectural masterpiece of St. Mark's Basilica. Ascend the Campanile di San Marco for breathtaking panoramic views of Venice. In the evening, treat yourself to a traditional Venetian cicchetti tour, sampling delectable small bites paired with local wines.",
+      "transportation": "bus",
+      "date": "2024-05-04"
+    },
+    {
+      "activities": [
+        "Visit the Doge's Palace, the former residence of the Doge of Venice",
+        "Cross the Bridge of Sighs, connecting the palace to the prisons",
+        "Explore the Rialto Bridge, Venice's oldest and most famous bridge",
+        "Enjoy a farewell dinner overlooking the Grand Canal"
+      ],
+      "location": "Venice",
+      "overview": "As your Italian journey nears its end, delve deeper into the history and allure of Venice. Explore the Doge's Palace, the historical residence of the Doge of Venice, and cross the Bridge of Sighs, connecting the palace to the prisons. Then, wander across the iconic Rialto Bridge, Venice's oldest and most famous. Conclude your adventure with an unforgettable farewell dinner overlooking the enchanting Grand Canal.",
+      "transportation": "bus",
+      "date": "2024-05-05"
+    },
+    {
+      "activities": ["Depart from Venice Marco Polo Airport (VCE)"],
+      "location": "Venice",
+      "overview": "Departure from Venice, carrying cherished memories of your Italian escapade. Arrivederci!",
+      "transportation": "flight",
+      "date": "2024-05-06"
+    }
+  ]
+}
