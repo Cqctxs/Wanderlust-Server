@@ -6,14 +6,11 @@
  * See the getting started guide for more information
  * https://ai.google.dev/gemini-api/docs/get-started/node
  */
-
-require("dotenv").config();
-
 const {
   GoogleGenerativeAI,
   HarmCategory,
   HarmBlockThreshold,
-  FunctionDeclarationSchemaType
+  FunctionDeclarationSchemaType,
 } = require("@google/generative-ai");
 
 const apiKey = process.env.GEMINI_API_KEY;
@@ -81,7 +78,9 @@ const generationConfig = {
   },
 };
 
-async function run() {
+const getItenerary = async (req, res) => {
+  const { country, startDate, endDate } = req.body;
+  if (!country || !startDate || !endDate) return res.status(400).json({ 'message': 'Missing fields, could not generate an itenerary.' });
   const chatSession = model.startChat({
     generationConfig,
     // safetySettings: Adjust safety settings
@@ -126,8 +125,8 @@ async function run() {
     ],
   });
 
-  const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
-  console.log(result.response.text());
-}
+  const result = await chatSession.sendMessage(`${country}, ${startDate}, ${endDate}`);
+  res.status(200).json({'itenerary': result.response.text()});
+};
 
-run();
+module.exports = { getItenerary };
