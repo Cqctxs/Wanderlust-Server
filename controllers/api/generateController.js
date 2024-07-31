@@ -1,18 +1,13 @@
-/*
- * Install the Generative AI SDK
- *
- * $ npm install @google/generative-ai
- *
- * See the getting started guide for more information
- * https://ai.google.dev/gemini-api/docs/get-started/node
- */
+const { Client } = require("@googlemaps/google-maps-services-js");
+const client = new Client({});
+
 const {
   GoogleGenerativeAI,
   HarmCategory,
   HarmBlockThreshold,
   FunctionDeclarationSchemaType,
 } = require("@google/generative-ai");
-
+require("dotenv").config();
 const apiKey = process.env.GEMINI_API_KEY;
 const genAI = new GoogleGenerativeAI(apiKey);
 
@@ -79,8 +74,8 @@ const generationConfig = {
 };
 
 const getItenerary = async (req, res) => {
-  const { country, startDate, endDate } = req.body;
-  if (!country || !startDate || !endDate) return res.status(400).json({ 'message': 'Missing fields, could not generate an itenerary.' });
+  //   const { country, startDate, endDate } = req.body;
+  //   if (!country || !startDate || !endDate) return res.status(400).json({ 'message': 'Missing fields, could not generate an itenerary.' });
   const chatSession = model.startChat({
     generationConfig,
     // safetySettings: Adjust safety settings
@@ -124,9 +119,35 @@ const getItenerary = async (req, res) => {
       },
     ],
   });
+  const result = await chatSession.sendMessage(`Spain, 2024-09-21, 2024-09-28`);
+  const gen = JSON.parse(result.response.text());
 
-  const result = await chatSession.sendMessage(`${country}, ${startDate}, ${endDate}`);
-  res.status(200).json({'itenerary': result.response.text()});
+  // Use map to create an array of promises
+  const promises = gen.itinerary.map((day) => {
+    return client
+      .geocode({
+        params: {
+          address: day.location,
+          key: process.env.MAPS_API_KEY,
+        },
+      })
+      .then((response) => {
+        console.log(response.data.results[0].geometry.location);
+        day.coordinates = response.data.results[0].geometry.location;
+      })
+      .catch((error) => {
+        console.log(error.response.data.error_message);
+      });
+  });
+
+  // Use Promise.all to wait for all promises to resolve
+  await Promise.all(promises);
+
+  // Now, log the itinerary after all coordinates have been updated
+  console.log(gen.itinerary);
+
+  //   const result = await chatSession.sendMessage(`${country}, ${startDate}, ${endDate}`);
+  //res.status(200).json({'itenerary': result.response.text()});
 };
-
+getItenerary();
 module.exports = { getItenerary };
