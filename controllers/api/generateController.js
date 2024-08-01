@@ -193,7 +193,7 @@ const getItenerary = async (req, res) => {
       console.log(hotelResponse.data.results[0]);
       day.hotel = hotelResponse.data.results[0]; // add hotel to day
     } catch (error) {
-      console.log(error.response.data.error_message);
+      console.log("A hotel could not be found for this day");
     }
   });
 
