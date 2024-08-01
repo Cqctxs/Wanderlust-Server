@@ -14,7 +14,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-pro",
   systemInstruction:
-    "Generate travel itineraries in the following JSON format. The country/area the user wants to visit will be inputted, as well as a starting date and ending date. The itenerary should start exactly on the starting date and end on the ending date. Make sure to include the best attractions and activities from all across the area (popular and not well known), organized by days at which an attraction is visited. Keep the descriptions for the activities short and consice. Make sure to include city name of the attractions in each day, and indicate the form of transportation that is needed to reach the location from the previous day. Write a brief overview of the activities in the day, almost like a preview of what is ahead.",
+    "Generate travel itineraries in the following JSON format. The country/area the user wants to visit will be inputted, as well as a starting date and ending date. The itenerary should start exactly on the starting date and end on the ending date. Make sure to include the best attractions and activities from all across the area (popular and not well known), organized by days at which an attraction is visited. Keep the descriptions for the activities short and consice. Add the searchable location name of each attraction, keeping only the most important words and leaving behind unnecessary information which makes the location hard to find. Make sure to include city name of the attractions in each day, and indicate the form of transportation that is needed to reach the location from the previous day. Write a brief overview of the activities in the day, almost like a preview of what is ahead.",
 });
 
 const generationConfig = {
@@ -56,7 +56,7 @@ const generationConfig = {
             locations: {
               type: FunctionDeclarationSchemaType.ARRAY,
               description:
-                "Array of strings listing the names of the attractions visited in the activities array.",
+                "Array of strings listing the names of the attractions visited in the activities array. Please make sure the location name is able to be searched on google maps.",
               items: {
                 type: FunctionDeclarationSchemaType.STRING,
               },
@@ -134,7 +134,7 @@ const getItenerary = async (req, res) => {
       },
     ],
   });
-  const result = await chatSession.sendMessage(`Spain, 2024-09-21, 2024-09-28`);
+  const result = await chatSession.sendMessage(`Canada, 2025-01-21, 2025-01-25`);
   const gen = JSON.parse(result.response.text());
 
   // Use map to create an array of promises for geocoding both cities and locations within each day
@@ -193,12 +193,9 @@ const getItenerary = async (req, res) => {
   });
 
   await Promise.all(hotelPromises);
-
-  // Now, log the itinerary after all coordinates have been updated
-  console.log(gen.itinerary);
-
-  //   const result = await chatSession.sendMessage(`${country}, ${startDate}, ${endDate}`);
-  //res.status(200).json({'itenerary': result.response.text()});
+  
+  //Send updated itinerary with geocoded locations and hotels
+  res.status(200).json(gen.itinerary);
 };
-getItenerary();
+
 module.exports = { getItenerary };

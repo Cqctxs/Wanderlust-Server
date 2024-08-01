@@ -1,17 +1,91 @@
 [
     {
       activities: [
-        'Arrive at Barcelona–El Prat Airport (BCN)',
-        'Check into your hotel in the Gothic Quarter',
-        'Take a stroll down Las Ramblas, a bustling tree-lined boulevard',
-        'Enjoy dinner at a tapas bar in the El Born district'
+        'Arrive at Vancouver International Airport (YVR), transfer to your hotel',
+        'Start exploring the city: visit Stanley Park, a sprawling urban park with scenic views',
+        'Walk along Robson Street known for its shopping and dining',
+        'Enjoy dinner at Gastown, the oldest neighborhood in Vancouver'
       ],
-      city: 'Barcelona',
-      date: '2024-09-21',
-      locations: [ 'Las Ramblas', 'El Born district' ],
-      overview: 'Welcome to Spain! Your journey begins in the vibrant city of Barcelona. After settling into your hotel, experience the lively atmosphere of Las Ramblas and savor delicious tapas in the charming El Born district.',
+      city: 'Vancouver',
+      date: '2025-01-21',
+      locations: [
+        'Vancouver International Airport',
+        'Stanley Park',
+        'Robson Street',
+        'Gastown'
+      ],
+      overview: "Welcome to Canada! Upon arrival in Vancouver, explore Stanley Park's natural beauty, enjoy the lively atmosphere of Robson Street, and experience the historic charm of Gastown. Transportation: flight",
       transportation: 'flight',
-      cityCoordinates: { lat: 41.3873974, lng: 2.168568 },
+      cityCoordinates: { lat: 49.2827291, lng: -123.1207375 },
+      locationCoordinates: [ [Object], [Object], [Object], [Object] ],
+      hotel: {
+        business_status: 'OPERATIONAL',
+        geometry: [Object],
+        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
+        icon_background_color: '#909CE1',
+        icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
+        name: 'Fairmont Hotel Vancouver',
+        photos: [Array],
+        place_id: 'ChIJHbH93TGoqEwRMwrQGCOk9B4',
+        plus_code: [Object],
+        rating: 4.5,
+        reference: 'ChIJHbH93TGoqEwRMwrQGCOk9B4',
+        scope: 'GOOGLE',
+        types: [Array],
+        user_ratings_total: 5518,
+        vicinity: '900 West Georgia Street, Vancouver'
+      }
+    },
+    {
+      activities: [
+        'Visit Granville Island Public Market, a vibrant market with local produce, crafts, and food stalls',
+        'Explore the Capilano Suspension Bridge Park, known for its suspension bridge high above the Capilano River',
+        'Enjoy a scenic gondola ride up Grouse Mountain for stunning views of the city and surrounding mountains',
+        'Have dinner at a restaurant in Yaletown, a trendy district with waterfront views'
+      ],
+      city: 'Vancouver',
+      date: '2025-01-22',
+      locations: [
+        'Granville Island Public Market',
+        'Capilano Suspension Bridge Park',
+        'Grouse Mountain',
+        'Yaletown'
+      ],
+      overview: 'Today, experience the diverse offerings of Vancouver, from the bustling Granville Island Market to the thrilling heights of the Capilano Suspension Bridge and the panoramic vistas from Grouse Mountain. Transportation: bus',
+      transportation: 'bus',
+      cityCoordinates: { lat: 49.2827291, lng: -123.1207375 },
+      locationCoordinates: [ [Object], [Object], [Object], [Object] ],
+      hotel: {
+        business_status: 'OPERATIONAL',
+        geometry: [Object],
+        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
+        icon_background_color: '#909CE1',
+        icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
+        name: 'Fairmont Hotel Vancouver',
+        photos: [Array],
+        place_id: 'ChIJHbH93TGoqEwRMwrQGCOk9B4',
+        plus_code: [Object],
+        rating: 4.5,
+        reference: 'ChIJHbH93TGoqEwRMwrQGCOk9B4',
+        scope: 'GOOGLE',
+        types: [Array],
+        user_ratings_total: 5518,
+        vicinity: '900 West Georgia Street, Vancouver'
+      }
+    },
+    {
+      activities: [
+        'Take a scenic train journey through the Canadian Rockies to Banff',
+        'Settle into your hotel and take some time to admire the breathtaking mountain scenery',
+        'Enjoy a relaxing evening stroll through the charming town of Banff',
+        "Have dinner at one of Banff's restaurants offering mountain views"
+      ],
+      city: 'Banff',
+      date: '2025-01-23',
+      locations: [ 'Banff', 'Banff Town' ],
+      overview: 'Embark on a memorable train journey through the Canadian Rockies to Banff. Settle in and soak up the majestic mountain scenery that surrounds this charming town. Transportation: train',
+      transportation: 'train',
+      cityCoordinates: { lat: 51.1784304, lng: -115.5707903 },
       locationCoordinates: [ [Object], [Object] ],
       hotel: {
         business_status: 'OPERATIONAL',
@@ -19,32 +93,32 @@
         icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
         icon_background_color: '#909CE1',
         icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'H10 Catalunya Plaça Boutique Hotel',
+        name: 'Banff Aspen Lodge',
         opening_hours: [Object],
         photos: [Array],
-        place_id: 'ChIJCWnbwfOipBIRUIfjsQvUQJ0',
+        place_id: 'ChIJ7diINk7KcFMRwVmpiME4R38',
         plus_code: [Object],
-        rating: 4.3,
-        reference: 'ChIJCWnbwfOipBIRUIfjsQvUQJ0',
+        rating: 4.2,
+        reference: 'ChIJ7diINk7KcFMRwVmpiME4R38',
         scope: 'GOOGLE',
         types: [Array],
-        user_ratings_total: 660,
-        vicinity: 'Plaça de Catalunya, 7, Barcelona'
+        user_ratings_total: 951,
+        vicinity: '401 Banff Avenue, Banff'
       }
     },
     {
       activities: [
-        "Visit the Sagrada Família, Gaudí's unfinished masterpiece",
-        'Explore Park Güell, a whimsical park with stunning architecture and city views',
-        "Wander through the Gothic Quarter's labyrinthine streets",
-        'Enjoy a traditional paella dinner'
+        'Visit Lake Louise, one of the most photographed lakes in the world, and admire its turquoise waters',
+        'Take a hike to the Lake Agnes Tea House for stunning views of Lake Louise',
+        'Explore Johnston Canyon and marvel at its waterfalls and limestone cliffs',
+        'Enjoy dinner in Banff, savoring the flavors of the Canadian Rockies'
       ],
-      city: 'Barcelona',
-      date: '2024-09-22',
-      locations: [ 'Sagrada Família', 'Park Güell', 'Gothic Quarter' ],
-      overview: "Today, immerse yourself in Barcelona's architectural wonders. Visit the Sagrada Família and Park Güell, both designed by the renowned Antoni Gaudí. Explore the historic Gothic Quarter and enjoy a classic Spanish paella dinner.",
+      city: 'Banff',
+      date: '2025-01-24',
+      locations: [ 'Lake Louise', 'Lake Agnes Tea House', 'Johnston Canyon' ],
+      overview: 'Today, experience the awe-inspiring beauty of Banff National Park with visits to iconic locations like Lake Louise, Lake Agnes Tea House, and Johnston Canyon. Transportation: bus',
       transportation: 'bus',
-      cityCoordinates: { lat: 41.3873974, lng: 2.168568 },
+      cityCoordinates: { lat: 51.1784304, lng: -115.5707903 },
       locationCoordinates: [ [Object], [Object], [Object] ],
       hotel: {
         business_status: 'OPERATIONAL',
@@ -52,209 +126,56 @@
         icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
         icon_background_color: '#909CE1',
         icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'H10 Catalunya Plaça Boutique Hotel',
+        name: 'Banff Aspen Lodge',
         opening_hours: [Object],
         photos: [Array],
-        place_id: 'ChIJCWnbwfOipBIRUIfjsQvUQJ0',
+        place_id: 'ChIJ7diINk7KcFMRwVmpiME4R38',
         plus_code: [Object],
-        rating: 4.3,
-        reference: 'ChIJCWnbwfOipBIRUIfjsQvUQJ0',
+        rating: 4.2,
+        reference: 'ChIJ7diINk7KcFMRwVmpiME4R38',
         scope: 'GOOGLE',
         types: [Array],
-        user_ratings_total: 660,
-        vicinity: 'Plaça de Catalunya, 7, Barcelona'
+        user_ratings_total: 951,
+        vicinity: '401 Banff Avenue, Banff'
       }
     },
     {
       activities: [
-        'Visit La Boqueria Market for a sensory overload of fresh produce and local delicacies',
-        "Explore the Picasso Museum and discover the artist's early works",
-        'Relax on Barceloneta Beach and enjoy the Mediterranean Sea',
-        'Experience the magic of a flamenco show'
+        'Enjoy a scenic drive along the Icefields Parkway, stopping at viewpoints to admire glaciers, waterfalls, and wildlife',
+        'Experience the Columbia Icefield Glacier Adventure, a unique opportunity to walk on a glacier',
+        'Visit Peyto Lake, known for its vibrant turquoise waters',
+        'Depart from Calgary International Airport (YYC)',
+        'Return home with unforgettable memories of your Canadian Rockies adventure'
       ],
-      city: 'Barcelona',
-      date: '2024-09-23',
-      locations: [ 'La Boqueria Market', 'Picasso Museum', 'Barceloneta Beach' ],
-      overview: "Experience the vibrant energy of Barcelona. Explore the bustling La Boqueria Market, delve into Picasso's art, relax on Barceloneta Beach, and be captivated by the passion of a flamenco performance.",
-      transportation: 'train',
-      cityCoordinates: { lat: 41.3873974, lng: 2.168568 },
-      locationCoordinates: [ [Object], [Object], [Object] ],
+      city: 'Calgary',
+      date: '2025-01-25',
+      locations: [
+        'Icefields Parkway',
+        'Columbia Icefield',
+        'Peyto Lake',
+        'Calgary International Airport'
+      ],
+      overview: 'Embark on a scenic drive along the unforgettable Icefields Parkway, witness the wonder of the Columbia Icefield, and capture the beauty of Peyto Lake before departing from Calgary. Transportation: bus',
+      transportation: 'bus',
+      cityCoordinates: { lat: 51.04473309999999, lng: -114.0718831 },
+      locationCoordinates: [ [Object], [Object], [Object], [Object] ],
       hotel: {
         business_status: 'OPERATIONAL',
         geometry: [Object],
         icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
         icon_background_color: '#909CE1',
         icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'H10 Catalunya Plaça Boutique Hotel',
+        name: 'Ramada Plaza by Wyndham Calgary Downtown',
         opening_hours: [Object],
         photos: [Array],
-        place_id: 'ChIJCWnbwfOipBIRUIfjsQvUQJ0',
+        place_id: 'ChIJVyXskeNvcVMREQQ7YFx1qlQ',
         plus_code: [Object],
-        rating: 4.3,
-        reference: 'ChIJCWnbwfOipBIRUIfjsQvUQJ0',
-        scope: 'GOOGLE',
-        types: [Array],
-        user_ratings_total: 660,
-        vicinity: 'Plaça de Catalunya, 7, Barcelona'
-      }
-    },
-    {
-      activities: [
-        'Take a day trip to Montserrat Monastery, nestled in the Montserrat mountains',
-        'Enjoy stunning views of the surrounding landscape',
-        'Hike to Sant Jeroni peak for panoramic vistas (optional)',
-        'Visit the Black Madonna statue'
-      ],
-      city: 'Montserrat',
-      date: '2024-09-24',
-      locations: [ 'Montserrat Monastery', 'Sant Jeroni peak' ],
-      overview: 'Escape the city and embark on a scenic day trip to Montserrat Monastery, perched high in the mountains. Enjoy breathtaking views, optional hiking, and visit the revered Black Madonna statue.',
-      transportation: 'train',
-      cityCoordinates: { lat: 16.742498, lng: -62.187366 },
-      locationCoordinates: [ [Object] ],
-      hotel: {
-        business_status: 'OPERATIONAL',
-        geometry: [Object],
-        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
-        icon_background_color: '#909CE1',
-        icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'SeaView Suite',
-        photos: [Array],
-        place_id: 'ChIJA5BqwyNTEowRXDZbDl429Rg',
         rating: 3.6,
-        reference: 'ChIJA5BqwyNTEowRXDZbDl429Rg',
+        reference: 'ChIJVyXskeNvcVMREQQ7YFx1qlQ',
         scope: 'GOOGLE',
         types: [Array],
-        user_ratings_total: 5,
-        vicinity: "QQJV+Q2F, Norman Ryan's Building, Cudjoe Head Main Road, Cudjoehead"
-      }
-    },
-    {
-      activities: [
-        'Take a high-speed train to Madrid',
-        'Check into your hotel in the city center',
-        "Explore the Plaza Mayor, Madrid's grand central square",
-        'Enjoy a tapas crawl through the La Latina district'
-      ],
-      city: 'Madrid',
-      date: '2024-09-25',
-      locations: [ 'Plaza Mayor', 'La Latina district' ],
-      overview: 'Journey to the heart of Spain, Madrid. Settle into your hotel and experience the grandeur of Plaza Mayor. Indulge in a delightful tapas crawl through the vibrant La Latina district.',
-      transportation: 'train',
-      cityCoordinates: { lat: 40.41672790000001, lng: -3.7032905 },
-      locationCoordinates: [ [Object] ],
-      hotel: {
-        business_status: 'OPERATIONAL',
-        geometry: [Object],
-        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
-        icon_background_color: '#909CE1',
-        icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'Hotel Europa',
-        opening_hours: [Object],
-        photos: [Array],
-        place_id: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        plus_code: [Object],
-        rating: 4.4,
-        reference: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        scope: 'GOOGLE',
-        types: [Array],
-        user_ratings_total: 1818,
-        vicinity: 'Calle del Carmen, 4, Madrid'
-      }
-    },
-    {
-      activities: [
-        'Visit the Prado Museum, home to masterpieces by Spanish masters like Goya and Velázquez',
-        'Explore the Royal Palace of Madrid, the official residence of the Spanish royal family',
-        "Relax in Retiro Park, Madrid's green oasis"
-      ],
-      city: 'Madrid',
-      date: '2024-09-26',
-      locations: [ 'Prado Museum', 'Royal Palace of Madrid', 'Retiro Park' ],
-      overview: 'Immerse yourself in art and history. Explore the masterpieces at the Prado Museum, wander through the opulent Royal Palace, and find tranquility in the beautiful Retiro Park.',
-      transportation: 'bus',
-      cityCoordinates: { lat: 40.41672790000001, lng: -3.7032905 },
-      locationCoordinates: [ [Object], [Object], [Object] ],
-      hotel: {
-        business_status: 'OPERATIONAL',
-        geometry: [Object],
-        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
-        icon_background_color: '#909CE1',
-        icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'Hotel Europa',
-        opening_hours: [Object],
-        photos: [Array],
-        place_id: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        plus_code: [Object],
-        rating: 4.4,
-        reference: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        scope: 'GOOGLE',
-        types: [Array],
-        user_ratings_total: 1818,
-        vicinity: 'Calle del Carmen, 4, Madrid'
-      }
-    },
-    {
-      activities: [
-        'Visit the Temple of Debod, an ancient Egyptian temple gifted to Spain',
-        "Explore the Gran Vía, Madrid's bustling avenue known for its theaters and shops",
-        'Enjoy a farewell dinner at a traditional Spanish restaurant'
-      ],
-      city: 'Madrid',
-      date: '2024-09-27',
-      locations: [ 'Temple of Debod', 'Gran Vía' ],
-      overview: 'Discover the unique charm of Madrid. Visit the Temple of Debod, experience the lively atmosphere of Gran Vía, and enjoy a memorable farewell dinner.',
-      transportation: 'bus',
-      cityCoordinates: { lat: 40.41672790000001, lng: -3.7032905 },
-      locationCoordinates: [ [Object], [Object] ],
-      hotel: {
-        business_status: 'OPERATIONAL',
-        geometry: [Object],
-        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
-        icon_background_color: '#909CE1',
-        icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'Hotel Europa',
-        opening_hours: [Object],
-        photos: [Array],
-        place_id: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        plus_code: [Object],
-        rating: 4.4,
-        reference: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        scope: 'GOOGLE',
-        types: [Array],
-        user_ratings_total: 1818,
-        vicinity: 'Calle del Carmen, 4, Madrid'
-      }
-    },
-    {
-      activities: [
-        'Depart from Adolfo Suárez Madrid–Barajas Airport (MAD)',
-        'Return home with cherished memories of your Spanish adventure'
-      ],
-      city: 'Madrid',
-      date: '2024-09-28',
-      locations: [ 'Adolfo Suárez Madrid–Barajas Airport (MAD)' ],
-      overview: 'As your Spanish escapade concludes, depart from Madrid, carrying the warmth of the Spanish sun and unforgettable memories.',
-      transportation: 'flight',
-      cityCoordinates: { lat: 40.41672790000001, lng: -3.7032905 },
-      locationCoordinates: [ [Object] ],
-      hotel: {
-        business_status: 'OPERATIONAL',
-        geometry: [Object],
-        icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/v1/png_71/lodging-71.png',
-        icon_background_color: '#909CE1',
-        icon_mask_base_uri: 'https://maps.gstatic.com/mapfiles/place_api/icons/v2/hotel_pinlet',
-        name: 'Hotel Europa',
-        opening_hours: [Object],
-        photos: [Array],
-        place_id: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        plus_code: [Object],
-        rating: 4.4,
-        reference: 'ChIJA6qiBX4oQg0RMNeuHkeyP0Y',
-        scope: 'GOOGLE',
-        types: [Array],
-        user_ratings_total: 1818,
-        vicinity: 'Calle del Carmen, 4, Madrid'
+        user_ratings_total: 1472,
+        vicinity: '708 8 Avenue Southwest, Calgary'
       }
     }
   ]
