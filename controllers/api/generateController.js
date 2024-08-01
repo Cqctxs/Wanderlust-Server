@@ -89,8 +89,11 @@ const generationConfig = {
 };
 
 const getItenerary = async (req, res) => {
-  //   const { country, startDate, endDate } = req.body;
-  //   if (!country || !startDate || !endDate) return res.status(400).json({ 'message': 'Missing fields, could not generate an itenerary.' });
+  const { country, startDate, endDate } = req.body;
+  if (!country || !startDate || !endDate)
+    return res
+      .status(400)
+      .json({ message: "Missing fields, could not generate an itenerary." });
   const chatSession = model.startChat({
     generationConfig,
     // safetySettings: Adjust safety settings
@@ -134,7 +137,9 @@ const getItenerary = async (req, res) => {
       },
     ],
   });
-  const result = await chatSession.sendMessage(`Canada, 2025-01-21, 2025-01-25`);
+  const result = await chatSession.sendMessage(
+    `${country}, ${startDate}, ${endDate}`
+  );
   const gen = JSON.parse(result.response.text());
 
   // Use map to create an array of promises for geocoding both cities and locations within each day
@@ -193,7 +198,7 @@ const getItenerary = async (req, res) => {
   });
 
   await Promise.all(hotelPromises);
-  
+
   //Send updated itinerary with geocoded locations and hotels
   res.status(200).json(gen.itinerary);
 };
