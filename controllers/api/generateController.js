@@ -154,7 +154,7 @@ const getItenerary = async (req, res) => {
       console.log(cityResponse.data.results[0].geometry.location);
       day.cityCoordinates = cityResponse.data.results[0].geometry.location; // Store city coordinates separately
     } catch (error) {
-      console.log(error.response.data.error_message);
+      console.log("Error geocoding city");
     }
     day.locationCoordinates = []; // Create an array to store location coordinates
 
