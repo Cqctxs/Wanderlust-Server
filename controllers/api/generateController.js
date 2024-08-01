@@ -180,7 +180,7 @@ const getItenerary = async (req, res) => {
   // Use Promise.all to wait for all promises to resolve
   await Promise.all(promises);
 
-  const hotelPromises = gen.itinerary.map(async (day) => {
+  const hotelPromises = gen.itinerary.slice(0, -1).map(async (day) => {
     try {
       const hotelResponse = await client.placesNearby({
         params: {
