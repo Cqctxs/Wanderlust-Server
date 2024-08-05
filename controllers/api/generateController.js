@@ -93,7 +93,7 @@ const getItenerary = async (req, res) => {
   if (!country || !startDate || !endDate)
     return res
       .status(400)
-      .json({ message: "Missing fields, could not generate an itenerary." });
+      .json({ message: "Missing fields, could not generate an itenerary.", body: req.body });
   const chatSession = model.startChat({
     generationConfig,
     // safetySettings: Adjust safety settings
@@ -141,22 +141,12 @@ const getItenerary = async (req, res) => {
     `${country}, ${startDate}, ${endDate}`
   );
   const gen = JSON.parse(result.response.text());
-
   // Use map to create an array of promises for geocoding both cities and locations within each day
   const promises = gen.itinerary.map(async (day) => {
-    try {
-      const cityResponse = await client.geocode({
-        params: {
-          address: day.city,
-          key: process.env.MAPS_API_KEY,
-        },
-      });
-      console.log(cityResponse.data.results[0].geometry.location);
-      day.cityCoordinates = cityResponse.data.results[0].geometry.location; // Store city coordinates separately
-    } catch (error) {
-      console.log(`Error geocoding city: ${day.city}`);
-    }
     day.locationCoordinates = []; // Create an array to store location coordinates
+    var lat = 0.0;
+    var lng = 0.0;
+    var cnt = 0.0;
 
     const locationPromises = day.locations.map(async (location) => {
       try {
@@ -166,7 +156,13 @@ const getItenerary = async (req, res) => {
             key: process.env.MAPS_API_KEY,
           },
         });
-        console.log(locationResponse.data.results[0].geometry.location);
+        console.log("geocode")
+        console.log(locationResponse.data.results[0].geometry.location)
+        const latt = parseFloat(locationResponse.data.results[0].geometry.location.lat)
+        const lngt = parseFloat(locationResponse.data.results[0].geometry.location.lng)
+        lat = lat+latt
+        lng = lng+lngt
+        cnt++;
         day.locationCoordinates.push(
           locationResponse.data.results[0].geometry.location
         );
@@ -175,6 +171,9 @@ const getItenerary = async (req, res) => {
       }
     });
     await Promise.all(locationPromises);
+    lat /= cnt;
+    lng /= cnt;
+    day.cityCoordinates = {lng, lat}
   });
 
   // Use Promise.all to wait for all promises to resolve
