@@ -1,5 +1,6 @@
 const { Client } = require("@googlemaps/google-maps-services-js");
 const client = new Client({});
+const User = require("../data/User");
 
 const {
   GoogleGenerativeAI,
@@ -88,12 +89,35 @@ const generationConfig = {
   },
 };
 
+const updateUser = async (sub, itinerary) => {
+  try {
+    let user = await User.findOne({ sub: sub }).exec();
+    if (!user) {
+      user = new User({
+        sub: sub,
+        previousGenerations: [itinerary],
+      });
+      console.log(`new user with sub ${sub} created.`);
+    } else {
+      user.previousGenerations.push(itinerary);
+    }
+    const result = await user.save();
+    console.log(result);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const getItenerary = async (req, res) => {
-  const { country, startDate, endDate } = req.body;
+  const { country, startDate, endDate, sub } = req.body;
   if (!country || !startDate || !endDate)
     return res
       .status(400)
-      .json({ message: "Missing fields, could not generate an itenerary." });
+      .json({ error: "Missing fields, could not generate an itenerary." });
+  if (!sub)
+    return res
+      .status(401)
+      .json({ error: "No user sub, make sure the user is logged in." });
   const chatSession = model.startChat({
     generationConfig,
     // safetySettings: Adjust safety settings
@@ -201,6 +225,7 @@ const getItenerary = async (req, res) => {
 
   //Send updated itinerary with geocoded locations and hotels
   res.status(200).json(gen.itinerary);
+  await updateUser(sub, gen.itinerary);
 };
 
 module.exports = { getItenerary };
