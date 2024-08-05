@@ -225,7 +225,7 @@ const getItenerary = async (req, res) => {
 
   //Send updated itinerary with geocoded locations and hotels
   res.status(200).json(gen.itinerary);
-  await updateUser(sub, gen.itinerary);
+  await updateUser(sub, gen);
 };
 
 module.exports = { getItenerary };
