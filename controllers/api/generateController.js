@@ -14,7 +14,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-pro",
   systemInstruction:
-    "Generate travel itineraries in the following JSON format. The country/area the user wants to visit will be inputted, as well as a starting date and ending date. The itenerary should start exactly on the starting date and end on the ending date. Make sure to include the best attractions and activities from all across the area (popular and not well known), organized by days at which an attraction is visited. Keep the descriptions for the activities short and consice. Add the searchable location name of each attraction, keeping only the most important words and leaving behind unnecessary information which makes the location hard to find. Make sure to include city name of the attractions in each day, and indicate the form of transportation that is needed to reach the location from the previous day. Write a brief overview of the activities in the day, almost like a preview of what is ahead.",
+    "Generate travel itineraries in the following JSON format. The country/area the user wants to visit will be inputted, as well as a starting date and ending date. The itenerary should start exactly on the starting date and end on the ending date. Make sure to include the best attractions and activities from all across the area (popular and not well known), organized by days at which an attraction is visited. Keep the descriptions for the activities short and consice. Add the specific, searchable location name of each attraction, so that the location can be found with the Google Geocoding API. Make sure to include city name of the attractions in each day, and indicate the form of transportation that is needed to reach the location from the previous day. Write a brief overview of the activities in the day, almost like a preview of what is ahead.",
 });
 
 const generationConfig = {
@@ -154,7 +154,7 @@ const getItenerary = async (req, res) => {
       console.log(cityResponse.data.results[0].geometry.location);
       day.cityCoordinates = cityResponse.data.results[0].geometry.location; // Store city coordinates separately
     } catch (error) {
-      console.log(error.response.data.error_message);
+      console.log(`Error geocoding city: ${day.city}`);
     }
     day.locationCoordinates = []; // Create an array to store location coordinates
 
@@ -171,7 +171,7 @@ const getItenerary = async (req, res) => {
           locationResponse.data.results[0].geometry.location
         );
       } catch (error) {
-        console.log("Error geocoding location");
+        console.log(`Error geocoding location: ${location}`);
       }
     });
     await Promise.all(locationPromises);
@@ -180,7 +180,7 @@ const getItenerary = async (req, res) => {
   // Use Promise.all to wait for all promises to resolve
   await Promise.all(promises);
 
-  const hotelPromises = gen.itinerary.map(async (day) => {
+  const hotelPromises = gen.itinerary.slice(0, -1).map(async (day) => {
     try {
       const hotelResponse = await client.placesNearby({
         params: {
@@ -193,7 +193,7 @@ const getItenerary = async (req, res) => {
       console.log(hotelResponse.data.results[0]);
       day.hotel = hotelResponse.data.results[0]; // add hotel to day
     } catch (error) {
-      console.log("A hotel could not be found for this day");
+      console.log(`A hotel could not be found for ${day.city}`);
     }
   });
 
