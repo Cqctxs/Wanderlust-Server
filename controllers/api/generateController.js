@@ -223,7 +223,7 @@ const getItenerary = async (req, res) => {
   await Promise.all(hotelPromises);
 
   //Send updated itinerary with geocoded locations and hotels
-  res.status(200).json(gen.itinerary);
+  res.status(200).json(gen);
   await updateUser(sub, gen);
 };
 
