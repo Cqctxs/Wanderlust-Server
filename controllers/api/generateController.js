@@ -15,7 +15,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
   model: "gemini-1.5-pro",
   systemInstruction:
-    "Generate travel itineraries in the following JSON format. The country/area the user wants to visit will be inputted, as well as a starting date and ending date. The itenerary should start exactly on the starting date and end on the ending date. Make sure to include the best attractions and activities from all across the area (popular and not well known), organized by days at which an attraction is visited. Keep the descriptions for the activities short and consice. Add the specific, searchable location name of each attraction, so that the location can be found with the Google Geocoding API. Make sure to include city name of the attractions in each day, and indicate the form of transportation that is needed to reach the location from the previous day. Write a brief overview of the activities in the day, almost like a preview of what is ahead.",
+    "Generate travel itineraries in the following JSON format. The country/area the user wants to visit will be inputted, as well as a starting date and ending date. The itinerary should start exactly on the starting date and end on the ending date. Make sure to include the best attractions and activities from all across the area (popular and not well known), organized by days at which an attraction is visited. Keep the descriptions for the activities short and consice. Add the specific, searchable location name of each attraction, so that the location can be found with the Google Geocoding API. Make sure to include city name of the attractions in each day, and indicate the form of transportation that is needed to reach the location from the previous day. Write a brief overview of the activities in the day, almost like a preview of what is ahead.",
 });
 
 const generationConfig = {
@@ -108,12 +108,12 @@ const updateUser = async (sub, itinerary) => {
   }
 };
 
-const getItenerary = async (req, res) => {
+const getItinerary = async (req, res) => {
   const { country, startDate, endDate, sub } = req.body;
   if (!country || !startDate || !endDate)
     return res
       .status(400)
-      .json({ error: "Missing fields, could not generate an itenerary." });
+      .json({ error: "Missing fields, could not generate an itinerary." });
   if (!sub)
     return res
       .status(401)
@@ -227,4 +227,4 @@ const getItenerary = async (req, res) => {
   await updateUser(sub, gen);
 };
 
-module.exports = { getItenerary };
+module.exports = { getItinerary };
