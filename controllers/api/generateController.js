@@ -201,7 +201,9 @@ const getItinerary = async (req, res) => {
     day.cityCoordinates = {lng, lat}
   });
 
-  const accessCode = (async () => {
+  await Promise.all(promises);
+
+  const accessCode = async () => {
     try {
       const options = {
         method: 'POST',
@@ -213,16 +215,18 @@ const getItinerary = async (req, res) => {
         })
       };
       
-      const response = await fetch('https://test.api.amadeus.com/v1/security/oauth2/token', options)
-      const json = await response.json()
-      console.log(json)
-      access_token = json.access_token
+      const response = await fetch('https://test.api.amadeus.com/v1/security/oauth2/token', options);
+      const json = await response.json();
+      console.log(json);
+      access_token = json.access_token;
+    } catch (error) {
+      console.log("Error in access code fetch:", error);
     }
-    catch (error) {
-      console.log("error in access code fetch")
-    }
-  })
-  await new Promise(accessCode)
+  };
+  
+  // Call and await the accessCode function
+  await accessCode();
+  
   const hotelPromises = gen.itinerary.slice(0, -1).map(async (day) => {
     
     try {
