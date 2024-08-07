@@ -165,6 +165,7 @@ const getItinerary = async (req, res) => {
     `${country}, ${startDate}, ${endDate}`
   );
   const gen = JSON.parse(result.response.text());
+  var access_token = ""
   // Use map to create an array of promises for geocoding both cities and locations within each day
   const promises = gen.itinerary.map(async (day) => {
     day.locationCoordinates = []; // Create an array to store location coordinates
@@ -199,22 +200,52 @@ const getItinerary = async (req, res) => {
     lng /= cnt;
     day.cityCoordinates = {lng, lat}
   });
-
+  
   // Use Promise.all to wait for all promises to resolve
-  await Promise.all(promises);
+  await Promise.all(promises)
 
-  const hotelPromises = gen.itinerary.slice(0, -1).map(async (day) => {
+  const accessCode = (async () => {
     try {
-      const hotelResponse = await client.placesNearby({
-        params: {
-          type: "lodging",
-          location: day.cityCoordinates,
-          radius: 5000, // Search within 5km of city center
-          key: process.env.MAPS_API_KEY,
-        },
-      });
-      console.log(hotelResponse.data.results[0]);
-      day.hotel = hotelResponse.data.results[0]; // add hotel to day
+      const options = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        body: new URLSearchParams({
+          grant_type: 'client_credentials',
+          client_id: process.env.AMADEUS_API_KEY,
+          client_secret: process.env.AMADEUS_API_SECRET
+        })
+      };
+      
+      const response = await fetch('https://test.api.amadeus.com/v1/security/oauth2/token', options)
+      const json = await response.json()
+      console.log(json)
+      access_token = json.access_token
+    }
+    catch (error) {
+      console.log("error in access code fetch")
+    }
+  })
+  await new Promise(accessCode)
+  const hotelPromises = gen.itinerary.slice(0, -1).map(async (day) => {
+    
+    try {
+      console.log(access_token)
+      const options = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + access_token
+        }
+      };
+      console.log(day.cityCoordinates)
+      console.log('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude='+day.cityCoordinates.lat+'&longitude='+day.cityCoordinates.lng)
+      const response = fetch('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude='+day.cityCoordinates.lat+'&longitude='+day.cityCoordinates.lng, options)
+      
+      const json = await response.json()
+      console.log(json)
+      hotel = json.data[0]
+      console.log(hotel)
+      day.hotel = hotel; // add hotel to day
     } catch (error) {
       console.log(`A hotel could not be found for ${day.city}`);
     }
