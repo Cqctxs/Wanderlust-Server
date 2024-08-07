@@ -200,9 +200,6 @@ const getItinerary = async (req, res) => {
     lng /= cnt;
     day.cityCoordinates = {lng, lat}
   });
-  
-  // Use Promise.all to wait for all promises to resolve
-  await Promise.all(promises)
 
   const accessCode = (async () => {
     try {
