@@ -71,7 +71,7 @@ const generationConfig = {
             overview: {
               type: FunctionDeclarationSchemaType.STRING,
               description:
-                "A breif summary of the day, including activities, and any transportation",
+                "A brief summary of the day, including activities, and any transportation",
             },
           },
           required: [
