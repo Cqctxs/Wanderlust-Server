@@ -1,7 +1,7 @@
 const User = require("../../data/User");
 
 const getUser = async (req, res) => {
-  const sub = req.params.sub;
+  const sub = req.body.sub;
   if (!sub) return res.status(400).json({ message: "Cannot get user sub" });
   try {
     let user = await User.findOne({ sub: sub }).exec();
