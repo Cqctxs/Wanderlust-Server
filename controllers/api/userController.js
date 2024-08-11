@@ -9,7 +9,7 @@ const getUser = async (req, res) => {
     const previousGenerations = user.previousGenerations;
     res.json( {previousGenerations} );
   } catch (error) {
-    res.status(500).json({ message: err.message });
+    res.status(500).json({ message: "Error getting user" });
   }
 };
 
