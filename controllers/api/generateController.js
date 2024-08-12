@@ -107,6 +107,7 @@ const updateUser = async (sub, itinerary) => {
 };
 
 const getItinerary = async (req, res) => {
+  console.log("hi chat");
   const { country, startDate, endDate, sub } = req.body;
   if (!country || !startDate || !endDate)
     return res
@@ -125,44 +126,60 @@ const getItinerary = async (req, res) => {
     ]
   });
 
-  const result = await chatSession.sendMessage(
-    `${country}, ${startDate}, ${endDate}`
-  );
+  const result = await chatSession.sendMessage(`
+    ${country}, ${startDate}, ${endDate}
+  `);
   const gen = JSON.parse(result.response.text());
-  var access_token = ""
+  let access_token = "";
   // Use map to create an array of promises for geocoding both cities and locations within each day
   const promises = gen.itinerary.map(async (day) => {
     day.locationCoordinates = []; // Create an array to store location coordinates
-    var lat = 0.0;
-    var lng = 0.0;
-    var cnt = 0.0;
+    let lat = 0.0;
+    let lng = 0.0;
+    let cnt = 0.0;
+    let cityLocation = [];
+
+    try {
+      const cityResponse = await client.geocode({
+        params: {
+          address: day.city,
+          key: process.env.MAPS_API_KEY,
+        },
+      });
+      cityLocation = cityResponse.data.results[0].geometry.location;
+      console.log("cityResponse:", cityLocation);
+    } catch (error) {
+      console.error(`Error geocoding city: ${day.city}`, error);
+    }
 
     const locationPromises = day.locations.map(async (location) => {
       try {
         const locationResponse = await client.geocode({
           params: {
-            address: location,
+            address: day.city,
             key: process.env.MAPS_API_KEY,
           },
         });
-        console.log("geocode")
-        console.log(locationResponse.data.results[0].geometry.location)
-        const latt = parseFloat(locationResponse.data.results[0].geometry.location.lat)
-        const lngt = parseFloat(locationResponse.data.results[0].geometry.location.lng)
-        lat = lat+latt
-        lng = lng+lngt
+        console.log("geocode");
+        console.log(day.city);
+        console.log(locationResponse.data.results[0].geometry);
+        const latt = parseFloat(locationResponse.data.results[0].geometry.location.lat);
+        const lngt = parseFloat(locationResponse.data.results[0].geometry.location.lng);
+        lat = lat+latt;
+        lng = lng+lngt;
         cnt++;
+        console.log(cnt);
+        console.log(lng + ", " + lat);
         day.locationCoordinates.push(
           locationResponse.data.results[0].geometry.location
         );
       } catch (error) {
         console.log(`Error geocoding location: ${location}`);
+        console.log(error);
       }
     });
     await Promise.all(locationPromises);
-    lat /= cnt;
-    lng /= cnt;
-    day.cityCoordinates = {lng, lat}
+    day.cityCoordinates = { lng: cityLocation.lng, lat: cityLocation.lat };
   });
 
   await Promise.all(promises);
@@ -227,7 +244,7 @@ const getItinerary = async (req, res) => {
       console.log("HOTEL")
       console.log(day.hotel)
     } catch (error) {
-      console.log(`A hotel could not be found for ${day.city}`);
+      console.log(`A hotel could not be found for +  ${day.city}`);
     }
   });
 
