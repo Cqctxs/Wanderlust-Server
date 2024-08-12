@@ -197,20 +197,35 @@ const getItinerary = async (req, res) => {
       console.log(access_token)
       const options = {
         method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
+        headers: {   
           Authorization: 'Bearer ' + access_token
         }
       };
+      console.log(options.headers.Authorization)
       console.log(day.cityCoordinates)
       console.log('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude='+day.cityCoordinates.lat+'&longitude='+day.cityCoordinates.lng)
-      const response = fetch('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude='+day.cityCoordinates.lat+'&longitude='+day.cityCoordinates.lng, options)
       
-      const json = await response.json()
-      console.log(json)
-      hotel = json.data[0]
-      console.log(hotel)
-      day.hotel = hotel; // add hotel to day
+      let reponse = await fetch('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude='+day.cityCoordinates.lat+'&longitude='+day.cityCoordinates.lng, options)
+      .then(response => response.json())
+      .then(data => {
+        let temp = data
+        if ('errors' in temp){
+          console.log("error")
+          day.hotel = "no hotel found"
+        }
+        else {
+          console.log("not error")
+          console.log(temp.data[0])
+          day.hotel = temp.data[0]
+        }
+      })
+      // const json = await response.json()
+      // console.log(json)
+      // hotel = json.data[0]
+      // console.log(hotel)
+      // day.hotel = hotel; // add hotel to day
+      console.log("HOTEL")
+      console.log(day.hotel)
     } catch (error) {
       console.log(`A hotel could not be found for ${day.city}`);
     }
