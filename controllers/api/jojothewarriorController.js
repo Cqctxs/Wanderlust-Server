@@ -93,6 +93,7 @@ const getItinerary = async (req, res) => {
     const chatSession = model.startChat({
         generationConfig,
         history: [
+            
         ]
     });
 

@@ -109,6 +109,8 @@ const updateUser = async (sub, itinerary) => {
 const getItinerary = async (req, res) => {
   console.log("hi chat");
   const { country, startDate, endDate, sub } = req.body;
+
+  console.log(`${country}, ${startDate}, ${endDate}, ${sub}`);
   if (!country || !startDate || !endDate)
     return res
       .status(400)
@@ -255,4 +257,4 @@ const getItinerary = async (req, res) => {
   await updateUser(sub, gen);
 };
 
-module.exports = { getItinerary, generationConfig, model };
+module.exports = { getItinerary };
