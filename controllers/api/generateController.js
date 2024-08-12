@@ -119,13 +119,10 @@ const getItinerary = async (req, res) => {
     return res
       .status(401)
       .json({ error: "No user sub, make sure the user is logged in." });
+
   const chatSession = model.startChat({
     generationConfig,
-    // safetySettings: Adjust safety settings
-    // See https://ai.google.dev/gemini-api/docs/safety-settings
-    history: [
-
-    ]
+    history: []
   });
 
   const result = await chatSession.sendMessage(`
@@ -133,13 +130,10 @@ const getItinerary = async (req, res) => {
   `);
   const gen = JSON.parse(result.response.text());
   let access_token = "";
-  // Use map to create an array of promises for geocoding both cities and locations within each day
+
   const promises = gen.itinerary.map(async (day) => {
-    day.locationCoordinates = []; // Create an array to store location coordinates
-    let lat = 0.0;
-    let lng = 0.0;
-    let cnt = 0.0;
-    let cityLocation = [];
+    day.locationCoordinates = []; 
+    let cityLocation = null;
 
     try {
       const cityResponse = await client.geocode({
@@ -148,8 +142,14 @@ const getItinerary = async (req, res) => {
           key: process.env.MAPS_API_KEY,
         },
       });
-      cityLocation = cityResponse.data.results[0].geometry.location;
-      console.log("cityResponse:", cityLocation);
+
+      if (cityResponse.data.results.length > 0) {
+        cityLocation = cityResponse.data.results[0].geometry.location;
+        day.cityCoordinates = cityLocation;
+        console.log("cityResponse:", cityLocation);
+      } else {
+        console.log(`No results found for city: ${day.city}`);
+      }
     } catch (error) {
       console.error(`Error geocoding city: ${day.city}`, error);
     }
@@ -158,30 +158,25 @@ const getItinerary = async (req, res) => {
       try {
         const locationResponse = await client.geocode({
           params: {
-            address: day.city,
+            address: location, // Adjust the address parameter for the specific location
             key: process.env.MAPS_API_KEY,
           },
         });
-        console.log("geocode");
-        console.log(day.city);
-        console.log(locationResponse.data.results[0].geometry);
-        const latt = parseFloat(locationResponse.data.results[0].geometry.location.lat);
-        const lngt = parseFloat(locationResponse.data.results[0].geometry.location.lng);
-        lat = lat+latt;
-        lng = lng+lngt;
-        cnt++;
-        console.log(cnt);
-        console.log(lng + ", " + lat);
-        day.locationCoordinates.push(
-          locationResponse.data.results[0].geometry.location
-        );
+
+        if (locationResponse.data.results.length > 0) {
+          const latt = parseFloat(locationResponse.data.results[0].geometry.location.lat);
+          const lngt = parseFloat(locationResponse.data.results[0].geometry.location.lng);
+          day.locationCoordinates.push({ lat: latt, lng: lngt });
+        } else {
+          console.log(`No results found for location: ${location}`);
+        }
       } catch (error) {
         console.log(`Error geocoding location: ${location}`);
         console.log(error);
       }
     });
+
     await Promise.all(locationPromises);
-    day.cityCoordinates = { lng: cityLocation.lng, lat: cityLocation.lat };
   });
 
   await Promise.all(promises);
@@ -190,7 +185,7 @@ const getItinerary = async (req, res) => {
     try {
       const options = {
         method: 'POST',
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: new URLSearchParams({
           grant_type: 'client_credentials',
           client_id: process.env.AMADEUS_API_KEY,
@@ -206,53 +201,37 @@ const getItinerary = async (req, res) => {
       console.log("Error in access code fetch:", error);
     }
   };
-  
-  // Call and await the accessCode function
+
   await accessCode();
-  
+
   const hotelPromises = gen.itinerary.slice(0, -1).map(async (day) => {
-    
     try {
-      console.log(access_token)
-      const options = {
-        method: 'GET',
-        headers: {   
-          Authorization: 'Bearer ' + access_token
+      if (day.cityCoordinates) {
+        const options = {
+          method: 'GET',
+          headers: { Authorization: 'Bearer ' + access_token }
+        };
+
+        const response = await fetch(`https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude=${day.cityCoordinates.lat}&longitude=${day.cityCoordinates.lng}`, options);
+        const data = await response.json();
+
+        if ('errors' in data) {
+          console.log("No hotel found for", day.city);
+          day.hotel = "no hotel found";
+        } else {
+          day.hotel = data.data.length > 0 ? data.data[0] : "no hotel found";
         }
-      };
-      console.log(options.headers.Authorization)
-      console.log(day.cityCoordinates)
-      console.log('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude='+day.cityCoordinates.lat+'&longitude='+day.cityCoordinates.lng)
-      
-      let reponse = await fetch('https://test.api.amadeus.com/v1/reference-data/locations/hotels/by-geocode?latitude='+day.cityCoordinates.lat+'&longitude='+day.cityCoordinates.lng, options)
-      .then(response => response.json())
-      .then(data => {
-        let temp = data
-        if ('errors' in temp){
-          console.log("error")
-          day.hotel = "no hotel found"
-        }
-        else {
-          console.log("not error")
-          console.log(temp.data[0])
-          day.hotel = temp.data[0]
-        }
-      })
-      // const json = await response.json()
-      // console.log(json)
-      // hotel = json.data[0]
-      // console.log(hotel)
-      // day.hotel = hotel; // add hotel to day
-      console.log("HOTEL")
-      console.log(day.hotel)
+      } else {
+        day.hotel = "no hotel found";
+      }
     } catch (error) {
-      console.log(`A hotel could not be found for +  ${day.city}`);
+      console.log(`A hotel could not be found for ${day.city}`);
+      console.log(error);
     }
   });
 
-    await Promise.all(hotelPromises);
+  await Promise.all(hotelPromises);
 
-  //Send updated itinerary with geocoded locations and hotels
   res.status(200).json(gen);
   await updateUser(sub, gen);
 };
