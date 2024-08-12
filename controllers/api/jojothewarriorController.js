@@ -86,6 +86,9 @@ const generationConfig = {
 };
 
 const getItinerary = async (req, res) => {
+    const { country, startDate, endDate } = req.query;
+    console.log(`${country}, ${startDate}, ${endDate}`);
+
     // handle error; for now pretend it's error trapped
     const chatSession = model.startChat({
         generationConfig,
@@ -95,7 +98,7 @@ const getItinerary = async (req, res) => {
 
     // sample request
     const result = await chatSession.sendMessage(
-        `South Korea, 08-11-24, 08-18-24`
+        `${country}, ${startDate}, ${endDate}`
     );
 
     const gen = JSON.parse(result.response.text());
