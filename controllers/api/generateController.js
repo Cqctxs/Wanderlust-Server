@@ -238,11 +238,7 @@ const getItinerary = async (req, res) => {
           day.hotel = temp.data[0]
         }
       })
-      // const json = await response.json()
-      // console.log(json)
-      // hotel = json.data[0]
-      // console.log(hotel)
-      // day.hotel = hotel; // add hotel to day
+
       console.log("HOTEL")
       console.log(day.hotel)
     } catch (error) {
@@ -252,7 +248,6 @@ const getItinerary = async (req, res) => {
 
     await Promise.all(hotelPromises);
 
-  //Send updated itinerary with geocoded locations and hotels
   res.status(200).json(gen);
   await updateUser(sub, gen);
 };
