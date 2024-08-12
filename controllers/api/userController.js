@@ -5,11 +5,10 @@ const getUser = async (req, res) => {
   if (!sub) return res.status(400).json({ message: "Cannot get user sub" });
   try {
     let user = await User.findOne({ sub: sub }).exec();
-    if (!user) res.status(404);
     const previousGenerations = user.previousGenerations;
     res.json( {previousGenerations} );
   } catch (error) {
-    res.status(500).json({ message: "Error getting user" });
+    res.status(404).json({ message: "No user found" });
   }
 };
 
